@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const categories = [
-    { name: 'Banarasi', path: '/shop?category=banarasi' },
+    { name: 'Banarasi', path: '/banarasi' },
     { name: 'Kanjivaram', path: '/shop?category=kanjivaram' },
     { name: 'Paithani', path: '/shop?category=paithani' },
     { name: 'Sambalpuri', path: '/shop?category=sambalpuri' },

@@ -1,0 +1,122 @@
+export const sarees = [
+  {
+    id: 1,
+    name: "Elegant Red Banarasi Silk Saree",
+    price: 3499,
+    originalPrice: 4999,
+    discount: 30,
+    description: "A beautiful red Banarasi silk saree with intricate golden zari work. Perfect for weddings and festive occasions.",
+    image: "https://i.pinimg.com/1200x/ba/d0/0d/bad00df86c7b21ce9b92fce43b373966.jpg",
+    category: "Banarasi",
+    material: "Pure Silk",
+    work: "Zari Work"
+  },
+  {
+    id: 2,
+    name: "Royal Blue Banarasi Saree",
+    price: 4299,
+    originalPrice: 5999,
+    discount: 28,
+    description: "Exquisite royal blue Banarasi silk saree with intricate silver zari work and floral motifs.",
+    image: "https://example.com/blue-banarasi.jpg",
+    category: "Banarasi",
+    material: "Pure Silk",
+    work: "Zari and Resham Work"
+  },
+  {
+    id: 3,
+    name: "Maroon Banarasi Silk Saree",
+    price: 3899,
+    originalPrice: 5499,
+    discount: 29,
+    description: "Rich maroon Banarasi silk saree with golden zari and buta designs, perfect for bridal wear.",
+    image: "https://example.com/maroon-banarasi.jpg",
+    category: "Banarasi",
+    material: "Pure Silk",
+    work: "Heavy Zari Work"
+  },
+  {
+    id: 4,
+    name: "Green Banarasi Georgette Saree",
+    price: 2899,
+    originalPrice: 3999,
+    discount: 28,
+    description: "Elegant green Banarasi georgette saree with floral motifs and zari border.",
+    image: "https://example.com/green-banarasi.jpg",
+    category: "Banarasi",
+    material: "Georgette",
+    work: "Zari and Resham Work"
+  },
+  {
+    id: 5,
+    name: "Pink Banarasi Tissue Saree",
+    price: 4599,
+    originalPrice: 6499,
+    discount: 29,
+    description: "Delicate pink Banarasi tissue saree with intricate gold zari work and floral patterns.",
+    image: "https://example.com/pink-banarasi.jpg",
+    category: "Banarasi",
+    material: "Tissue Silk",
+    work: "Heavy Zari Work"
+  },
+  {
+    id: 6,
+    name: "Black and Gold Banarasi Saree",
+    price: 5199,
+    originalPrice: 6999,
+    discount: 26,
+    description: "Stunning black Banarasi silk saree with rich gold zari work, perfect for grand occasions.",
+    image: "https://example.com/black-gold-banarasi.jpg",
+    category: "Banarasi",
+    material: "Pure Silk",
+    work: "Heavy Zari Work"
+  },
+  {
+    id: 7,
+    name: "Peach Banarasi Organza Saree",
+    price: 3799,
+    originalPrice: 5299,
+    discount: 28,
+    description: "Ethereal peach Banarasi organza saree with delicate zari work and floral motifs.",
+    image: "https://example.com/peach-banarasi.jpg",
+    category: "Banarasi",
+    material: "Organza",
+    work: "Zari and Resham Work"
+  },
+  {
+    id: 8,
+    name: "Mustard Yellow Banarasi Silk Saree",
+    price: 3399,
+    originalPrice: 4799,
+    discount: 29,
+    description: "Vibrant mustard yellow Banarasi silk saree with intricate zari and resham work.",
+    image: "https://example.com/mustard-banarasi.jpg",
+    category: "Banarasi",
+    material: "Pure Silk",
+    work: "Zari and Resham Work"
+  },
+  {
+    id: 9,
+    name: "Lavender Banarasi Silk Saree",
+    price: 3999,
+    originalPrice: 5499,
+    discount: 27,
+    description: "Elegant lavender Banarasi silk saree with silver zari work and floral motifs.",
+    image: "https://example.com/lavender-banarasi.jpg",
+    category: "Banarasi",
+    material: "Pure Silk",
+    work: "Zari and Resham Work"
+  },
+  {
+    id: 10,
+    name: "Cream and Gold Banarasi Saree",
+    price: 4799,
+    originalPrice: 6599,
+    discount: 27,
+    description: "Classic cream Banarasi silk saree with rich gold zari work, perfect for weddings.",
+    image: "https://example.com/cream-gold-banarasi.jpg",
+    category: "Banarasi",
+    material: "Pure Silk",
+    work: "Heavy Zari Work"
+  }
+];
