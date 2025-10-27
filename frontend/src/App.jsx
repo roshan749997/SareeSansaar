@@ -1,12 +1,12 @@
-import React from 'react'
+import { BrowserRouter } from 'react-router-dom';
+import Router from './router/Router';
 
-const App = () => {
+function App() {
   return (
-    <div>
-      VWelcome To SareeSansar
-    
-    </div>
-  )
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
