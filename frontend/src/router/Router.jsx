@@ -5,6 +5,8 @@ import Shop from '../pages/Shop';
 import Collections from '../pages/Collections';
 import About from '../pages/About';
 import Contact from '../pages/Contact';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
 
 const Router = () => {
   return (
@@ -16,6 +18,8 @@ const Router = () => {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
       </Route>
+      <Route path="signin" element={<SignIn />} />
+      <Route path="signup" element={<SignUp />} />
     </Routes>
   );
 };

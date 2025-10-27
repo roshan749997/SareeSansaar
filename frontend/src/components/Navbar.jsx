@@ -16,7 +16,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white border-t border-gray-200 shadow-sm">
+    <nav className="sticky top-20 z-40 bg-white border-t border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center space-x-8 py-3 overflow-x-auto">
           {categories.map((category) => (
