@@ -52,10 +52,10 @@ const Router = () => {
           <Route index element={<Home />} />
           <Route path="shop" element={<Shop />} />
           <Route path="collections" element={<Collections />} />
-          <Route path="banarasi">
-            <Route index element={<BanarasiSareeList />} />
-            <Route path=":sareeId" element={<BanarasiSareeDetail />} />
-          </Route>
+          {/* Saree Categories */}
+          <Route path="category/banarasi" element={<BanarasiSareeList />} />
+          {/* Product Detail - Using ID for better reliability */}
+          <Route path="product/:id" element={<BanarasiSareeDetail />} />
           <Route path="silk/banarasi" element={<BanarasiSareeList />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />

@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { FaShoppingCart, FaRupeeSign, FaArrowLeft, FaStar, FaRegStar, FaBolt } from "react-icons/fa";
-import { sarees } from "../../data/sarees";
+import { FaShoppingCart, FaRupeeSign, FaArrowLeft, FaStar, FaRegStar, FaBolt, FaSpinner } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
+import { fetchSareeById } from "../../services/api";
 
 const BanarasiSareeDetail = () => {
-  const { sareeId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [saree, setSaree] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const loadSaree = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchSareeById(id);
+        setSaree(data);
+      } catch (err) {
+        console.error('Failed to load saree details:', err);
+        setError('Failed to load saree details. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadSaree();
+  }, [id]);
 
   const handleAddToCart = () => {
     if (!saree) return;
@@ -45,6 +64,29 @@ const BanarasiSareeDetail = () => {
   const incrementQuantity = () => setQuantity(prev => prev + 1);
   const decrementQuantity = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
 
+<<<<<<< HEAD
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <FaSpinner className="animate-spin text-4xl text-indigo-600" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-500">{error}</p>
+        <button
+          onClick={() => navigate(-1)}
+          className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors"
+        >
+          Go Back
+        </button>
+      </div>
+    );
+  }
+=======
   useEffect(() => {
     if (location.state?.saree) {
       setSaree(location.state.saree);
@@ -63,9 +105,20 @@ const BanarasiSareeDetail = () => {
 
     navigate('/banarasi');
   }, [sareeId, navigate, location.state]);
+>>>>>>> origin/main
 
   if (!saree) {
-    return <div className="text-center py-10">Loading...</div>;
+    return (
+      <div className="text-center py-12">
+        <p className="text-gray-600">Saree not found</p>
+        <button
+          onClick={() => navigate('/shop')}
+          className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors"
+        >
+          Browse Sarees
+        </button>
+      </div>
+    );
   }
 
   const sellingPrice = Math.round(saree.mrp - (saree.mrp * (saree.discountPercent || 0) / 100));
