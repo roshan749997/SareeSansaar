@@ -70,23 +70,23 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-rose-50 via-pink-50 to-amber-50 border-t border-rose-100">
+    <footer className="bg-[#273142] text-white border-t border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 bg-clip-text text-transparent mb-4">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
               SareeSansaar
             </h2>
-            <p className="text-gray-600 text-sm leading-relaxed mb-6 max-w-md">
+            <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-md">
               Discover the elegance of traditional Indian sarees. We curate authentic, handcrafted sarees from master artisans across India, celebrating centuries of textile heritage and timeless beauty.
             </p>
             
 
             {/* Social Media */}
             <div>
-              <h4 className="text-lg font-semibold text-gray-800 mb-3">Follow Us</h4>
+              <h4 className="text-lg font-semibold text-white mb-3">Follow Us</h4>
               <div className="flex space-x-3">
                 {socialLinks.map((social) => (
                   <a
@@ -94,7 +94,7 @@ const Footer = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white rounded-full text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-amber-500 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-110"
+                    className="p-2 bg-white/10 rounded-full text-white hover:bg-white/20 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-110"
                     aria-label={social.name}
                   >
                     {social.icon}
@@ -106,16 +106,16 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4 relative inline-block">
+            <h3 className="text-lg font-semibold text-white mb-4 relative inline-block">
               Quick Links
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-pink-400 to-amber-400"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white"></span>
             </h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-gray-600 hover:text-rose-500 transition-colors duration-200 inline-block hover:translate-x-1 transform text-sm"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 inline-block hover:translate-x-1 transform text-sm"
                   >
                     {link.name}
                   </Link>
@@ -126,16 +126,16 @@ const Footer = () => {
 
           {/* Categories */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4 relative inline-block">
+            <h3 className="text-lg font-semibold text-white mb-4 relative inline-block">
               Categories
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-pink-400 to-amber-400"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white"></span>
             </h3>
             <ul className="space-y-2">
               {categories.map((category) => (
                 <li key={category.name}>
                   <Link
                     to={category.path}
-                    className="text-gray-600 hover:text-rose-500 transition-colors duration-200 inline-block hover:translate-x-1 transform text-sm"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 inline-block hover:translate-x-1 transform text-sm"
                   >
                     {category.name}
                   </Link>
@@ -146,16 +146,16 @@ const Footer = () => {
 
           {/* Customer Service */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4 relative inline-block">
+            <h3 className="text-lg font-semibold text-white mb-4 relative inline-block">
               Customer Service
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-pink-400 to-amber-400"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white"></span>
             </h3>
             <ul className="space-y-2">
               {customerService.map((service) => (
                 <li key={service.name}>
                   <Link
                     to={service.path}
-                    className="text-gray-600 hover:text-rose-500 transition-colors duration-200 inline-block hover:translate-x-1 transform text-sm"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 inline-block hover:translate-x-1 transform text-sm"
                   >
                     {service.name}
                   </Link>
@@ -168,27 +168,27 @@ const Footer = () => {
 
 
         {/* Copyright */}
-        <div className="border-t border-rose-200 pt-6 text-center">
-          <p className="text-gray-600 text-sm mb-2">
-            © {currentYear} <span className="font-semibold bg-gradient-to-r from-pink-500 to-amber-500 bg-clip-text text-transparent">SareeSansaar</span>. All rights reserved.
+        <div className="border-t border-gray-700 pt-6 text-center">
+          <p className="text-gray-300 text-sm mb-2">
+            © {currentYear} <span className="font-semibold text-white">SareeSansaar</span>. All rights reserved.
           </p>
-          <p className="text-xs text-gray-500 mb-4">
+          <p className="text-xs text-gray-400 mb-4">
             GSTIN: 27ABCDE1234F1Z5 | CIN: U74999MH2020PTC123456
           </p>
-          <div className="flex justify-center space-x-4 text-xs text-gray-500">
+          <div className="flex justify-center space-x-4 text-xs text-gray-400">
             <Link to="/privacy" className="hover:text-rose-500 transition-colors duration-200">
               Privacy Policy
             </Link>
-            <span>•</span>
-            <Link to="/terms" className="hover:text-rose-500 transition-colors duration-200">
+            <span className="text-gray-600">•</span>
+            <Link to="/terms" className="hover:text-white transition-colors duration-200">
               Terms of Service
             </Link>
-            <span>•</span>
-            <Link to="/shipping" className="hover:text-rose-500 transition-colors duration-200">
+            <span className="text-gray-600">•</span>
+            <Link to="/shipping" className="hover:text-white transition-colors duration-200">
               Shipping Policy
             </Link>
-            <span>•</span>
-            <Link to="/returns" className="hover:text-rose-500 transition-colors duration-200">
+            <span className="text-gray-600">•</span>
+            <Link to="/returns" className="hover:text-white transition-colors duration-200">
               Return Policy
             </Link>
           </div>
