@@ -9,7 +9,7 @@ configDotenv();
 
 const server = express();
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5174';
 server.use(cors({ origin: FRONTEND_URL, credentials: true }));
 server.use(express.json());
 server.use(cookieParser());

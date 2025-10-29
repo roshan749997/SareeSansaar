@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../utils/api';
 
 const SignUp = () => {
@@ -24,6 +24,7 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +39,11 @@ const SignUp = () => {
       const name = `${formData.firstName} ${formData.lastName}`.trim();
       const resp = await api.signup({ name, email: formData.email, password: formData.password });
       setSuccess('Account created successfully');
-      if (resp?.token) localStorage.setItem('auth_token', resp.token);
+      if (resp?.token) {
+        localStorage.setItem('auth_token', resp.token);
+        // Redirect to home after successful signup
+        navigate('/', { replace: true });
+      }
     } catch (err) {
       setError(err.message || 'Failed to sign up');
     } finally {
