@@ -7,6 +7,11 @@ const productSchema = new mongoose.Schema(
     discountPercent: { type: Number, default: 0, min: 0, max: 100 }, // Discount in %
     description: { type: String },
     category: { type: String, required: true, index: true },
+    categoryId: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Category',
+      index: true 
+    },
 
     product_info: {
       brand: { type: String },

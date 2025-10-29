@@ -56,10 +56,21 @@ const Navbar = () => {
     }
   };
 
+  // Navigation links
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Shop', path: '/shop' },
     { name: 'Collections', path: '/collections' },
+    { 
+      name: 'Categories', 
+      submenu: [
+        { name: 'Banarasi', path: '/category/banarasi' },
+        { name: 'Kanjivaram', path: '/category/kanjivaram' },
+        { name: 'Chanderi', path: '/category/chanderi' },
+        { name: 'Tussar', path: '/category/tussar' },
+        { name: 'Maheshwari', path: '/category/maheshwari' },
+      ]
+    },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];

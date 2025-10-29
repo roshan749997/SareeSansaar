@@ -1,26 +1,36 @@
-import React, { useContext } from "react";
-import { FaShoppingCart, FaRupeeSign } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaShoppingCart, FaRupeeSign, FaSpinner } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { sarees } from "../../data/sarees";
 import { useCart } from "../../context/CartContext";
+import { fetchSarees } from "../../services/api";
 
 const BanarasiSareeList = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const [sarees, setSarees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadSarees = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchSarees('Banarasi');
+        setSarees(data);
+      } catch (err) {
+        console.error('Failed to load sarees:', err);
+        setError('Failed to load sarees. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadSarees();
+  }, []);
 
   const handleCardClick = (saree) => {
-    // Use the title to create a URL-friendly slug
-    const slug = saree.title
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '') // Remove special characters
-      .replace(/\s+/g, '-')      // Replace spaces with hyphens
-      .replace(/-+/g, '-');      // Replace multiple hyphens with single
-    
-    // Store the full saree data in session storage to pass to the detail page
-    sessionStorage.setItem('currentSaree', JSON.stringify(saree));
-    
-    // Navigate to the detail page with the slug and ID
-    navigate(`/banarasi/${slug}`, { state: { saree } });
+    // Navigate to the product detail page using the product ID
+    navigate(`/product/${saree._id}`);
   };
 
   const handleAddToCart = (e, saree) => {
@@ -36,12 +46,31 @@ const BanarasiSareeList = () => {
       alert('Failed to add item to cart. Please try again.');
     }
   };
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <FaSpinner className="animate-spin text-4xl text-indigo-600" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Banarasi Silk Sarees</h1>
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-          {sarees.map((saree) => (
+        {sarees.length === 0 ? (
+          <p className="text-center text-gray-500">No sarees found in this category.</p>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            {sarees.map((saree) => (
             <div 
               key={saree.title}
               className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
@@ -100,8 +129,9 @@ const BanarasiSareeList = () => {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
