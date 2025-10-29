@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { api } from '../utils/api';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -11,10 +12,28 @@ const SignIn = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Sign In:', formData);
-    // Handle sign in logic here
+    setError('');
+    setSuccess('');
+    setLoading(true);
+    try {
+      const resp = await api.signin({ email: formData.email, password: formData.password });
+      // store token then redirect to intended page or home
+      if (resp?.token) localStorage.setItem('auth_token', resp.token);
+      const redirectTo = location.state?.from?.pathname || '/';
+      navigate(redirectTo, { replace: true });
+    } catch (err) {
+      setError(err.message || 'Failed to sign in');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,6 +77,8 @@ const SignIn = () => {
 
             {/* Sign In Form */}
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-neutral-100">
+              {error && (<div className="mb-4 text-sm text-red-600">{error}</div>)}
+              {success && (<div className="mb-4 text-sm text-green-600">{success}</div>)}
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-2">
@@ -109,9 +130,10 @@ const SignIn = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  disabled={loading}
+                  className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 disabled:opacity-60"
                 >
-                  Sign In
+                  {loading ? 'Signing In...' : 'Sign In'}
                 </button>
               </form>
 

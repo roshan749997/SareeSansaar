@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { api } from '../utils/api';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -20,10 +21,29 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Sign Up:', formData);
-    // Handle sign up logic here
+    setError('');
+    setSuccess('');
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    setLoading(true);
+    try {
+      const name = `${formData.firstName} ${formData.lastName}`.trim();
+      const resp = await api.signup({ name, email: formData.email, password: formData.password });
+      setSuccess('Account created successfully');
+      if (resp?.token) localStorage.setItem('auth_token', resp.token);
+    } catch (err) {
+      setError(err.message || 'Failed to sign up');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -67,6 +87,8 @@ const SignUp = () => {
 
             {/* Sign Up Form */}
             <div className="bg-white rounded-2xl shadow-lg p-6 border border-neutral-100">
+              {error && (<div className="mb-3 text-sm text-red-600">{error}</div>)}
+              {success && (<div className="mb-3 text-sm text-green-600">{success}</div>)}
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
@@ -190,9 +212,10 @@ const SignUp = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-2.5 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-sm"
+                  disabled={loading}
+                  className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-2.5 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-sm disabled:opacity-60"
                 >
-                  Create Account
+                  {loading ? 'Creating...' : 'Create Account'}
                 </button>
               </form>
 
