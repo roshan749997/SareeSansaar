@@ -121,20 +121,68 @@ const Header = () => {
           ))}
         </div>
 
-        {/* Mobile Navigation */}
-        <div className="md:hidden overflow-x-auto py-3 -mx-4 px-4">
-          <div className="flex space-x-6 min-w-max">
+        {/* Mobile Navigation - Horizontal Scroll */}
+        <div className="md:hidden -mx-4">
+          {/* Main Categories */}
+          <div className="flex space-x-2 overflow-x-auto px-4 pt-3 pb-2 hide-scrollbar">
             {categories.map((category) => (
-              <Link
-                key={category.name}
-                to={category.path}
-                className="text-gray-700 hover:text-rose-500 font-medium text-sm whitespace-nowrap transition-colors duration-200 relative group"
-              >
-                {category.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-amber-400 group-hover:w-full transition-all duration-300"></span>
-              </Link>
+              <div key={category.name} className="flex-shrink-0">
+                <button
+                  onClick={() => handleClick(category.name === activeCategory ? null : category.name)}
+                  className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 whitespace-nowrap ${
+                    activeCategory === category.name 
+                      ? 'bg-rose-500 text-white shadow-md' 
+                      : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  {category.name}
+                </button>
+              </div>
             ))}
           </div>
+          
+          {/* Subcategories */}
+          {activeCategory && (
+            <div className="bg-white border-t border-gray-200 mt-2 py-3">
+              <div className="flex items-center justify-between px-4 mb-2">
+                <h3 className="text-sm font-medium text-gray-700">
+                  {categories.find(cat => cat.name === activeCategory)?.name} Categories
+                </h3>
+                <button 
+                  onClick={() => setActiveCategory(null)}
+                  className="text-rose-500 text-sm font-medium"
+                >
+                  Close
+                </button>
+              </div>
+              <div className="px-4 space-y-1">
+                {categories
+                  .find(cat => cat.name === activeCategory)
+                  ?.subcategories?.map((subcategory) => (
+                    <Link
+                      key={subcategory.name}
+                      to={subcategory.path}
+                      onClick={() => setActiveCategory(null)}
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-rose-500 hover:bg-rose-50 rounded-md transition-colors duration-200"
+                    >
+                      {subcategory.name}
+                    </Link>
+                  ))}
+              </div>
+            </div>
+          )}
+          
+          <style jsx>{`
+            .hide-scrollbar::-webkit-scrollbar {
+              display: none;
+              height: 0;
+            }
+            .hide-scrollbar {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+              scrollbar-height: none;
+            }
+          `}</style>
         </div>
       </div>
     </header>
