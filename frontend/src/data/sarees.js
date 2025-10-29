@@ -35,7 +35,7 @@ export const sarees = [
       IncludedComponents: "1 Saree, 1 Blouse Piece",
     },
     images: {
-      image1: "https://example.com/blue-banarasi.jpg",
+      image1: "https://i.pinimg.com/736x/6f/7c/c4/6f7cc47f5919767e58a1224b08d0baca.jpg",
     },
   },
   {
