@@ -114,7 +114,7 @@ const BanarasiSareeDetail = () => {
               <img
                 src={saree.images?.image1 || 'https://via.placeholder.com/600x800?text=Image+Not+Available'}
                 alt={saree.title}
-                className="absolute top-0 left-0 w-full h-full object-contain p-6"
+                className="absolute top-0 left-0 w-full h-full object-contain"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = 'https://via.placeholder.com/600x800?text=Image+Not+Available';
