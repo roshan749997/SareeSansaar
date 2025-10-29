@@ -186,7 +186,7 @@ const Navbar = () => {
             ) : (
               <button
                 onClick={handleLogin}
-                className="px-4 py-2 bg-gradient-to-r from-rose-500 to-rose-600 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5"
+                className="px-4 py-2 bg-[#800020] text-white rounded-lg font-medium hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#6b001c]"
               >
                 Login
               </button>
