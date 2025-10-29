@@ -74,9 +74,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo/Brand */}
           <Link to="/" className="flex-shrink-0">
-            <h1 className="text-3xl md:text-4xl font-serif font-bold bg-gradient-to-r from-pink-400 via-rose-400 to-amber-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300">
-              SareeSansaar
-            </h1>
+            <img 
+              src="/src/assets/SareeLogo.png" 
+              alt="SareeSansaar Logo" 
+              className="h-12 md:h-16 w-auto hover:scale-105 transition-transform duration-300"
+            />
           </Link>
 
           {/* Desktop Navigation */}
