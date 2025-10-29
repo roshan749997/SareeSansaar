@@ -1,12 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaShoppingCart, FaRupeeSign, FaArrowLeft, FaStar, FaRegStar } from "react-icons/fa";
+import { FaShoppingCart, FaRupeeSign, FaArrowLeft, FaStar, FaRegStar, FaBolt } from "react-icons/fa";
 import { sarees } from "../../data/sarees";
+import { useCart } from "../../context/CartContext";
 
 const BanarasiSareeDetail = () => {
   const { sareeId } = useParams();
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [saree, setSaree] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [isAdding, setIsAdding] = useState(false);
+
+  const handleAddToCart = () => {
+    if (!saree) return;
+    
+    setIsAdding(true);
+    try {
+      // Add the item to cart with the selected quantity
+      for (let i = 0; i < quantity; i++) {
+        addToCart(saree);
+      }
+      // Show success message
+      alert(`${saree.name} ${quantity > 1 ? `(${quantity} items) ` : ''}added to cart!`);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add item to cart. Please try again.');
+    } finally {
+      setIsAdding(false);
+    }
+  };
+
+  const handleBuyNow = () => {
+    handleAddToCart();
+    navigate('/cart');
+  };
+
+  const incrementQuantity = () => setQuantity(prev => prev + 1);
+  const decrementQuantity = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
 
   useEffect(() => {
     const selectedSaree = sarees.find(s => s.id === parseInt(sareeId));
@@ -88,18 +119,43 @@ const BanarasiSareeDetail = () => {
               </div>
             </div>
 
+            {/* Quantity Selector */}
+            <div className="flex items-center mb-6">
+              <span className="text-gray-700 font-medium mr-4">Quantity:</span>
+              <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
+                <button 
+                  onClick={decrementQuantity}
+                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 cursor-pointer"
+                  disabled={quantity <= 1}
+                >
+                  -
+                </button>
+                <span className="px-4 py-1 border-x border-gray-300">{quantity}</span>
+                <button 
+                  onClick={incrementQuantity}
+                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 cursor-pointer"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
-                className="flex-1 bg-gradient-to-r from-amber-500 to-pink-500 text-white py-3 px-6 rounded-lg flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity"
-                onClick={() => {
-                  // Add to cart logic here
-                }}
+                className="flex-1 bg-gradient-to-r from-amber-500 to-pink-500 text-white py-3 px-6 rounded-lg flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity disabled:opacity-70 cursor-pointer"
+                onClick={handleAddToCart}
+                disabled={isAdding}
               >
                 <FaShoppingCart />
-                <span>Add to Cart</span>
+                <span>{isAdding ? 'Adding...' : 'Add to Cart'}</span>
               </button>
-              <button className="flex-1 bg-white border-2 border-pink-500 text-pink-600 py-3 px-6 rounded-lg hover:bg-pink-50 transition-colors">
-                Buy Now
+              <button 
+                className="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 text-white py-3 px-6 rounded-lg flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity cursor-pointer"
+                onClick={handleBuyNow}
+              >
+                <FaBolt />
+                <span>Buy Now</span>
               </button>
             </div>
 

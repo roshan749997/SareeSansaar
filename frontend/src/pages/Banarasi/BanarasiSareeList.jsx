@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaShoppingCart, FaRupeeSign } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { sarees } from "../../data/sarees";
+import { useCart } from "../../context/CartContext";
 
 const BanarasiSareeList = () => {
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   const handleCardClick = (sareeId) => {
     navigate(`/banarasi/${sareeId}`);
+  };
+
+  const handleAddToCart = (e, saree) => {
+    e.stopPropagation();
+    console.log('Add to cart clicked for:', saree.id); // Debug log
+    try {
+      addToCart(saree);
+      console.log('Item added to cart successfully');
+      // Optional: Add a toast notification
+      alert(`${saree.name} added to cart!`);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add item to cart. Please try again.');
+    }
   };
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -33,7 +49,7 @@ className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:sh
                     }}
                   />
                 </div>
-              </div>
+              </div> 
               
               {/* Product Info */}
               <div className="p-2 sm:p-3 flex-grow flex flex-col">
@@ -52,11 +68,9 @@ className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:sh
                 </div>
                 
                 <button 
-                  className="w-full bg-gradient-to-r from-amber-500 to-pink-500 text-white py-1.5 px-3 text-sm rounded-md flex items-center justify-center space-x-1 hover:opacity-90 transition-opacity"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // Add to cart logic here
-                  }}
+                  className="w-full bg-gradient-to-r from-amber-500 to-pink-500 text-white py-1.5 px-3 text-sm rounded-md flex items-center justify-center space-x-1 hover:opacity-90 transition-opacity cursor-pointer"
+                  onClick={(e) => handleAddToCart(e, saree)}
+                  aria-label={`Add ${saree.name} to cart`}
                 >
                   <FaShoppingCart className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="text-xs sm:text-sm">Add to Cart</span>
