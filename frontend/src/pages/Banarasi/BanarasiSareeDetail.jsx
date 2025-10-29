@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { FaShoppingCart, FaRupeeSign, FaArrowLeft, FaStar, FaRegStar, FaBolt } from "react-icons/fa";
 import { sarees } from "../../data/sarees";
 import { useCart } from "../../context/CartContext";
@@ -17,12 +17,23 @@ const BanarasiSareeDetail = () => {
     
     setIsAdding(true);
     try {
+      // Create a cart item with the required structure
+      const cartItem = {
+        ...saree,
+        // Ensure we have all required fields for the cart
+        id: saree.title, // Use title as ID if no ID exists
+        price: Math.round(saree.mrp - (saree.mrp * (saree.discountPercent || 0) / 100)),
+        originalPrice: saree.mrp,
+        discount: saree.discountPercent,
+        image: saree.images?.image1
+      };
+      
       // Add the item to cart with the selected quantity
       for (let i = 0; i < quantity; i++) {
-        addToCart(saree);
+        addToCart(cartItem);
       }
       // Show success message
-      alert(`${saree.name} ${quantity > 1 ? `(${quantity} items) ` : ''}added to cart!`);
+      alert(`${saree.title} ${quantity > 1 ? `(${quantity} items) ` : ''}added to cart!`);
     } catch (error) {
       console.error('Error adding to cart:', error);
       alert('Failed to add item to cart. Please try again.');
@@ -40,17 +51,33 @@ const BanarasiSareeDetail = () => {
   const decrementQuantity = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
 
   useEffect(() => {
-    const selectedSaree = sarees.find(s => s.id === parseInt(sareeId));
-    if (selectedSaree) {
-      setSaree(selectedSaree);
-    } else {
-      navigate('/banarasi');
+    // First try to get the saree from the navigation state
+    if (location.state?.saree) {
+      setSaree(location.state.saree);
+      return;
     }
-  }, [sareeId, navigate]);
+    
+    // If not in state, try to get from session storage
+    const savedSaree = sessionStorage.getItem('currentSaree');
+    if (savedSaree) {
+      try {
+        setSaree(JSON.parse(savedSaree));
+        return;
+      } catch (error) {
+        console.error('Error parsing saved saree data:', error);
+      }
+    }
+    
+    // If no saree data is found, redirect to the list
+    navigate('/banarasi');
+  }, [sareeId, navigate, location.state]);
 
   if (!saree) {
     return <div className="text-center py-10">Loading...</div>;
   }
+
+  // Calculate selling price based on MRP and discount percentage
+  const sellingPrice = Math.round(saree.mrp - (saree.mrp * (saree.discountPercent || 0) / 100));
 
   return (
     <div className="max-w-6xl mx-auto p-4 md:p-8">
@@ -67,8 +94,8 @@ const BanarasiSareeDetail = () => {
           <div className="w-full overflow-hidden rounded-xl bg-gray-50">
             <div className="relative pt-[120%] overflow-hidden">
               <img
-                src={saree.image}
-                alt={saree.name}
+                src={saree.images?.image1 || 'https://via.placeholder.com/600x800?text=Image+Not+Available'}
+                alt={saree.title}
                 className="absolute top-0 left-0 w-full h-full object-contain p-6"
                 onError={(e) => {
                   e.target.onerror = null;
@@ -80,7 +107,7 @@ const BanarasiSareeDetail = () => {
 
           {/* Product Details */}
           <div className="py-4 px-2">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">{saree.name}</h1>
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">{saree.title}</h1>
             
             <div className="flex items-center mb-4">
               <div className="flex text-yellow-400 mr-2">
@@ -95,27 +122,59 @@ const BanarasiSareeDetail = () => {
               <div className="flex items-center">
                 <FaRupeeSign className="text-gray-700" />
                 <span className="text-3xl font-bold text-gray-900 ml-1">
-                  {saree.price.toLocaleString()}
+                  {sellingPrice.toLocaleString()}
                 </span>
               </div>
-              <span className="text-green-600 text-lg line-through ml-4">
-                ₹{saree.originalPrice.toLocaleString()}
+              <span className="text-gray-400 text-lg line-through ml-4">
+                ₹{saree.mrp.toLocaleString()}
               </span>
-              <span className="bg-pink-100 text-pink-700 text-sm font-medium px-2.5 py-0.5 rounded ml-4">
-                {saree.discount}% OFF
-              </span>
+              {saree.discountPercent > 0 && (
+                <span className="bg-pink-100 text-pink-700 text-sm font-medium px-2.5 py-0.5 rounded ml-4">
+                  {saree.discountPercent}% OFF
+                </span>
+              )}
             </div>
 
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Description</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">Description</h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
                 {saree.description}
               </p>
               
-              <div className="mt-4 space-y-2">
-                <p className="text-gray-700"><span className="font-medium">Material:</span> {saree.material}</p>
-                <p className="text-gray-700"><span className="font-medium">Work:</span> {saree.work}</p>
-                <p className="text-gray-700"><span className="font-medium">Category:</span> {saree.category}</p>
+              <div className="space-y-4">
+                <h4 className="text-xl font-semibold text-gray-800 border-b pb-2">Product Information</h4>
+                <div className="space-y-3 text-gray-700">
+                  <div className="flex">
+                    <span className="w-36 font-medium text-gray-600">Brand:</span>
+                    <span>{saree.product_info?.brand || 'N/A'}</span>
+                  </div>
+                  <div className="flex">
+                    <span className="w-36 font-medium text-gray-600">Manufacturer:</span>
+                    <span>{saree.product_info?.manufacturer || 'N/A'}</span>
+                  </div>
+                  <div className="flex">
+                    <span className="w-36 font-medium text-gray-600">Category:</span>
+                    <span>{saree.category}</span>
+                  </div>
+                  <div className="flex">
+                    <span className="w-36 font-medium text-gray-600">Material:</span>
+                    <span>{saree.product_info?.SareeMaterial || 'N/A'}</span>
+                  </div>
+                  <div className="flex">
+                    <span className="w-36 font-medium text-gray-600">Color:</span>
+                    <span>{saree.product_info?.SareeColor || 'N/A'}</span>
+                  </div>
+                  <div className="flex">
+                    <span className="w-36 font-medium text-gray-600">Length:</span>
+                    <span>{saree.product_info?.SareeLength || 'N/A'}</span>
+                  </div>
+                  {saree.product_info?.IncludedComponents && (
+                    <div className="flex">
+                      <span className="w-36 font-medium text-gray-600">Included:</span>
+                      <span>{saree.product_info.IncludedComponents}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 

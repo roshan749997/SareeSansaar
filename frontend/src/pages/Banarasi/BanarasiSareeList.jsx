@@ -8,8 +8,19 @@ const BanarasiSareeList = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  const handleCardClick = (sareeId) => {
-    navigate(`/banarasi/${sareeId}`);
+  const handleCardClick = (saree) => {
+    // Use the title to create a URL-friendly slug
+    const slug = saree.title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-')      // Replace spaces with hyphens
+      .replace(/-+/g, '-');      // Replace multiple hyphens with single
+    
+    // Store the full saree data in session storage to pass to the detail page
+    sessionStorage.setItem('currentSaree', JSON.stringify(saree));
+    
+    // Navigate to the detail page with the slug and ID
+    navigate(`/banarasi/${slug}`, { state: { saree } });
   };
 
   const handleAddToCart = (e, saree) => {
@@ -32,16 +43,16 @@ const BanarasiSareeList = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {sarees.map((saree) => (
             <div 
-              key={saree.id}
-className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
-              onClick={() => handleCardClick(saree.id)}
+              key={saree.title}
+              className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
+              onClick={() => handleCardClick(saree)}
             >
               {/* Product Image */}
               <div className="relative bg-white p-1.5">
                 <div className="relative pt-[100%] overflow-hidden">
                   <img 
-                    src={saree.image} 
-                    alt={saree.name}
+                    src={saree.images?.image1 || 'https://via.placeholder.com/300x300?text=Image+Not+Available'} 
+                    alt={saree.title}
                     className="absolute top-0 left-0 w-full h-full object-contain p-1.5"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -54,27 +65,39 @@ className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:sh
               {/* Product Info */}
               <div className="p-2 sm:p-3 flex-grow flex flex-col">
                 <h3 className="text-gray-900 font-semibold text-base mb-1 line-clamp-2 h-12">
-                  {saree.name}
+                  {saree.title || saree.name}
                 </h3>
-                <p className="text-gray-500 text-xs mb-2 line-clamp-2 h-6">{saree.material} with {saree.work}</p>
+                {saree.product_info?.manufacturer && (
+                  <p className="text-gray-500 text-xs mb-2 line-clamp-1">By {saree.product_info.manufacturer}</p>
+                )}
                 
-                <div className="flex items-center justify-between mb-1 sm:mb-2">
-                  <div className="flex items-center">
-                    <FaRupeeSign className="h-4 w-4 text-gray-700" />
-                    <span className="text-gray-900 font-bold text-lg ml-1">{saree.price.toLocaleString()}</span>
+                <div className="mt-auto">
+                  <div className="flex items-center justify-between mb-1 sm:mb-2">
+                    <div className="flex items-center">
+                      <FaRupeeSign className="h-4 w-4 text-gray-700" />
+                      <span className="text-gray-900 font-bold text-lg ml-1">
+                        {saree.price?.toLocaleString() || (saree.mrp - (saree.mrp * (saree.discountPercent || 0) / 100)).toLocaleString()}
+                      </span>
+                    </div>
+                    <span className="text-gray-400 text-xs line-through">
+                      ₹{saree.mrp?.toLocaleString() || saree.originalPrice?.toLocaleString()}
+                    </span>
+                    {(saree.discountPercent > 0 || saree.discount) && (
+                      <span className="text-orange-500 text-xs font-medium">
+                        {(saree.discountPercent || saree.discount)}% OFF
+                      </span>
+                    )}
                   </div>
-                  <span className="text-green-600 text-xs line-through">₹{saree.originalPrice.toLocaleString()}</span>
-                  <span className="text-orange-500 text-xs font-medium">{saree.discount}% OFF</span>
-                </div>
                 
-                <button 
-                  className="w-full bg-gradient-to-r from-amber-500 to-pink-500 text-white py-1.5 px-3 text-sm rounded-md flex items-center justify-center space-x-1 hover:opacity-90 transition-opacity cursor-pointer"
-                  onClick={(e) => handleAddToCart(e, saree)}
-                  aria-label={`Add ${saree.name} to cart`}
-                >
-                  <FaShoppingCart className="h-3 w-3 sm:h-4 sm:w-4" />
-                  <span className="text-xs sm:text-sm">Add to Cart</span>
-                </button>
+                  <button 
+                    className="w-full bg-gradient-to-r from-amber-500 to-pink-500 text-white py-1.5 px-3 text-sm rounded-md flex items-center justify-center space-x-1 hover:opacity-90 transition-opacity cursor-pointer mt-2"
+                    onClick={(e) => handleAddToCart(e, saree)}
+                    aria-label={`Add ${saree.name} to cart`}
+                  >
+                    <FaShoppingCart className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="text-xs sm:text-sm">Add to Cart</span>
+                  </button>
+                </div>
               </div>
             </div>
           ))}
