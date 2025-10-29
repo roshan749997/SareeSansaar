@@ -64,7 +64,6 @@ const BanarasiSareeDetail = () => {
   const incrementQuantity = () => setQuantity(prev => prev + 1);
   const decrementQuantity = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
 
-<<<<<<< HEAD
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -86,26 +85,6 @@ const BanarasiSareeDetail = () => {
       </div>
     );
   }
-=======
-  useEffect(() => {
-    if (location.state?.saree) {
-      setSaree(location.state.saree);
-      return;
-    }
-
-    const savedSaree = sessionStorage.getItem('currentSaree');
-    if (savedSaree) {
-      try {
-        setSaree(JSON.parse(savedSaree));
-        return;
-      } catch (error) {
-        console.error('Error parsing saved saree data:', error);
-      }
-    }
-
-    navigate('/banarasi');
-  }, [sareeId, navigate, location.state]);
->>>>>>> origin/main
 
   if (!saree) {
     return (
