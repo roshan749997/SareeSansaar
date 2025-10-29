@@ -119,12 +119,12 @@ const BanarasiSareeList = () => {
                   </div>
                 
                   <button 
-                    className="w-full bg-[#FFD814] text-gray-900 py-2 px-3 text-sm rounded-md flex items-center justify-center space-x-2 hover:bg-[#F7CA00] transition-colors disabled:opacity-70 cursor-pointer mt-3 shadow-sm border border-[#FCD200]"
+                    className="w-full bg-gradient-to-r from-amber-500 to-pink-500 text-white py-1.5 px-3 text-sm rounded-md flex items-center justify-center space-x-1 hover:opacity-90 transition-opacity cursor-pointer mt-2"
                     onClick={(e) => handleAddToCart(e, saree)}
-                    aria-label={`Add ${saree.title} to cart`}
+                    aria-label={`Add ${saree.name} to cart`}
                   >
-                    <FaShoppingCart className="h-4 w-4" />
-                    <span className="text-sm font-medium">Add to Cart</span>
+                    <FaShoppingCart className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="text-xs sm:text-sm">Add to Cart</span>
                   </button>
                 </div>
               </div>
