@@ -1,23 +1,24 @@
 const Home = () => {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-rose-100 via-pink-50 to-amber-50 py-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-serif font-bold bg-gradient-to-r from-pink-600 via-rose-600 to-amber-600 bg-clip-text text-transparent mb-6 animate-fade-in">
-            Welcome to SareeSansaar
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto">
-            Discover the timeless elegance of traditional Indian sarees
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-gradient-to-r from-pink-500 to-amber-500 text-white font-semibold rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-              Shop Now
-            </button>
-            <button className="px-8 py-3 border-2 border-rose-400 text-rose-600 font-semibold rounded-full hover:bg-rose-50 transition-all duration-300">
-              View Collections
-            </button>
-          </div>
+    <div className="min-h-screen -mt-4">
+      {/* Hero Section with Responsive Banner */}
+      <section className="relative w-full">
+        {/* Desktop Banner - Hidden on mobile */}
+        <div className="hidden md:block w-full">
+          <img 
+            src="/src/assets/DesktopViewbannerHeroSection.png" 
+            alt="SareeSansaar - Premium Saree Collection"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+        
+        {/* Mobile Banner - Hidden on desktop */}
+        <div className="md:hidden w-full">
+          <img 
+            src="/src/assets/MobileViewbannerHeroSection.png" 
+            alt="SareeSansaar - Premium Saree Collection"
+            className="w-full h-auto object-cover"
+          />
         </div>
       </section>
 

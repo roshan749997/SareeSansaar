@@ -76,9 +76,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
-              SareeSansaar
-            </h2>
+            {/* Logo/Brand */}
+          <Link to="/" className="flex-shrink-0">
+            <img 
+              src="/src/assets/SareeLogo.png" 
+              alt="SareeSansaar Logo" 
+              className="h-12 md:h-16 w-auto hover:scale-105 transition-transform duration-300"
+            />
+          </Link>
             <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-md">
               Discover the elegance of traditional Indian sarees. We curate authentic, handcrafted sarees from master artisans across India, celebrating centuries of textile heritage and timeless beauty.
             </p>
