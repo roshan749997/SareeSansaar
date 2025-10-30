@@ -28,7 +28,7 @@ function Cart() {
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <button 
         onClick={() => navigate(-1)}
-        className="flex items-center text-gray-600 hover:text-gray-900 mb-6"
+        className="flex items-center text-[#800020] hover:text-[#660019] mb-6 transition-colors"
       >
         <FaArrowLeft className="mr-2" /> Continue Shopping
       </button>
@@ -42,7 +42,7 @@ function Cart() {
           <p className="text-gray-500 mb-6">Looks like you haven't added anything to your cart yet.</p>
           <button 
             onClick={() => navigate('/shop')}
-            className="bg-gradient-to-r from-amber-500 to-pink-500 text-white px-6 py-2 rounded-md hover:opacity-90 transition-opacity"
+            className="bg-[#800020] text-white px-6 py-2 rounded-md hover:bg-[#660019] transition-colors"
           >
             Continue Shopping
           </button>
@@ -125,14 +125,14 @@ function Cart() {
               
               <button 
                 onClick={() => alert('Proceeding to checkout...')}
-                className="w-full bg-gradient-to-r from-amber-500 to-pink-500 text-white py-3 px-4 rounded-md hover:opacity-90 transition-opacity font-medium"
+                className="w-full bg-[#800020] text-white py-3 px-4 rounded-md hover:bg-[#660019] transition-colors font-medium"
               >
                 Proceed to Checkout
               </button>
               
               <button 
                 onClick={clearCart}
-                className="w-full mt-3 text-red-500 border border-red-300 py-2 px-4 rounded-md hover:bg-red-50 transition-colors text-sm font-medium"
+                className="w-full mt-3 text-[#800020] border border-[#800020] py-2 px-4 rounded-md hover:bg-[#800020] hover:text-white transition-colors text-sm font-medium"
               >
                 Clear Cart
               </button>
