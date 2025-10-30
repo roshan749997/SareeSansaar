@@ -182,7 +182,7 @@ const BanarasiSareeDetail = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <button 
-                  className="flex-1 bg-[#FFD814] text-gray-900 py-3 px-6 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#F7CA00] transition-colors disabled:opacity-70 cursor-pointer shadow-sm border border-[#FCD200]"
+                  className="flex-1 bg-white text-[#800020] py-3 px-6 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#660019] hover:text-white transition-colors disabled:opacity-70 cursor-pointer shadow-sm border border-[#800020]"
                   onClick={handleAddToCart}
                   disabled={isAdding}
                 >
@@ -190,7 +190,7 @@ const BanarasiSareeDetail = () => {
                   <span className="font-medium">{isAdding ? 'Adding...' : 'Add to Cart'}</span>
                 </button>
                 <button 
-                  className="flex-1 bg-[#FFA41C] text-white py-3 px-6 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#FF8F00] transition-colors cursor-pointer shadow-sm border border-[#FFB700]"
+                  className="flex-1 bg-[#800020] text-white py-3 px-6 rounded-lg flex items-center justify-center space-x-2 hover:bg-[#660019] transition-colors cursor-pointer shadow-sm border border-[#800020]"
                   onClick={handleBuyNow}
                 >
                   <FaBolt className="h-5 w-5" />
