@@ -9,8 +9,8 @@ import Contact from '../pages/Contact';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
-import BanarasiSareeList from '../pages/Banarasi/BanarasiSareeList';
-import BanarasiSareeDetail from '../pages/Banarasi/BanarasiSareeDetail';
+import CategoryList from '../pages/CategoryList';
+import ProductDetail from '../components/ProductDetail';
 import ProductList from '../components/ProductList';
 import Cart from '../components/cart';
 
@@ -55,15 +55,14 @@ const Router = () => {
           <Route path="collections" element={<Collections />} />
           {/* Saree Categories */}
           {/* Backwards-compatible static routes */}
-          <Route path="category/banarasi" element={<BanarasiSareeList />} />
-          <Route path="silk/banarasi" element={<BanarasiSareeList />} />
+          <Route path="category/banarasi" element={<CategoryList />} />
+          <Route path="silk/banarasi" element={<CategoryList />} />
 
           {/* Dynamic category/subcategory routes - single UI (ProductList) */}
           <Route path="category/:categoryName" element={<ProductList />} />
           <Route path="category/:categoryName/:subCategoryName" element={<ProductList />} />
           {/* Product Detail - Using ID for better reliability */}
-          <Route path="product/:id" element={<BanarasiSareeDetail />} />
-          <Route path="silk/banarasi" element={<BanarasiSareeList />} />
+          <Route path="product/:id" element={<ProductDetail />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="cart" element={<Cart />} />
