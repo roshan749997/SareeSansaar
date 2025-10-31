@@ -11,6 +11,7 @@ import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
 import BanarasiSareeList from '../pages/Banarasi/BanarasiSareeList';
 import BanarasiSareeDetail from '../pages/Banarasi/BanarasiSareeDetail';
+import ProductList from '../components/ProductList';
 import Cart from '../components/cart';
 
 const isAuthenticated = () => {
@@ -53,7 +54,13 @@ const Router = () => {
           <Route path="shop" element={<Shop />} />
           <Route path="collections" element={<Collections />} />
           {/* Saree Categories */}
+          {/* Backwards-compatible static routes */}
           <Route path="category/banarasi" element={<BanarasiSareeList />} />
+          <Route path="silk/banarasi" element={<BanarasiSareeList />} />
+
+          {/* Dynamic category/subcategory routes - single UI (ProductList) */}
+          <Route path="category/:categoryName" element={<ProductList />} />
+          <Route path="category/:categoryName/:subCategoryName" element={<ProductList />} />
           {/* Product Detail - Using ID for better reliability */}
           <Route path="product/:id" element={<BanarasiSareeDetail />} />
           <Route path="silk/banarasi" element={<BanarasiSareeList />} />

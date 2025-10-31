@@ -2,21 +2,27 @@ import { Product } from '../models/product.js';
 
 export const getProducts = async (req, res) => {
   try {
-    const { category } = req.query;
+    // Accept either `subcategory` (preferred) or `category` query param
+    const rawCategory = (req.query.subcategory || req.query.category || '').toString();
+    // normalize slug-like values (e.g., "soft-silk" -> "soft silk") and trim
+    const category = rawCategory.replace(/-/g, ' ').trim();
     let query = {};
-    
+
     console.log('Received request with query params:', req.query);
-    
+
     if (category) {
-      // Try multiple ways to match the category
+      // Try multiple ways to match the category or subcategory fields
+      const re = new RegExp(category, 'i');
       query = {
         $or: [
-          { 'category.name': { $regex: new RegExp(category, 'i') } },
-          { 'category': { $regex: new RegExp(category, 'i') } },
-          { 'category.slug': { $regex: new RegExp(category, 'i') } }
+          { 'category.name': { $regex: re } },
+          { 'category': { $regex: re } },
+          { 'category.slug': { $regex: re } },
+          { 'subcategory': { $regex: re } },
+          { 'tags': { $regex: re } }
         ]
       };
-      
+
       console.log('Search query:', JSON.stringify(query, null, 2));
     }
 

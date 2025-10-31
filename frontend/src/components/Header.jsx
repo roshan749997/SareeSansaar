@@ -8,81 +8,81 @@ const Header = () => {
   const categories = [
     { 
       name: 'Silk', 
-      path: '/silk',
+      path: '/category/silk',
       subcategories: [
-        { name: 'Soft Silk Sarees', path: '/silk/soft-silk' },
-        { name: 'Kanjivaram Sarees', path: '/silk/kanjivaram' },
-        { name: 'Banarasi Sarees', path: '/silk/banarasi' },
-        { name: 'Maheshwari Silk', path: '/silk/maheshwari' },
-        { name: 'Raw Silk Sarees', path: '/silk/raw-silk' },
-        { name: 'Mysore Silk Sarees', path: '/silk/mysore-silk' },
-        { name: 'Sambalpuri Sarees', path: '/silk/Sambalpuri-Sarees' },
-        { name: 'Kalamkari Print Saree', path: '/silk/kalamkari-print-saree' }
+        { name: 'Soft Silk Sarees', path: '/category/silk/soft-silk' },
+        { name: 'Kanjivaram Sarees', path: '/category/silk/kanjivaram' },
+        { name: 'Banarasi Sarees', path: '/category/silk/banarasi' },
+        { name: 'Maheshwari Silk', path: '/category/silk/maheshwari' },
+        { name: 'Raw Silk Sarees', path: '/category/silk/raw-silk' },
+        { name: 'Mysore Silk Sarees', path: '/category/silk/mysore-silk' },
+        { name: 'Sambalpuri Sarees', path: '/category/silk/sambalpuri-sarees' },
+        { name: 'Kalamkari Print Saree', path: '/category/silk/kalamkari-print-saree' }
 
       ]
     },
     { 
       name: 'Cotton', 
-      path: '/cotton',
+      path: '/category/cotton',
       subcategories: [
-  { name: 'Bengali Sarees', path: '/cotton/bengali-sarees' },
-  { name: 'Maheshwari Cotton', path: '/cotton/maheshwari-cotton' },
-  { name: 'Jaipur Cotton', path: '/cotton/jaipur-cotton' },
-  { name: 'South Cotton Sarees', path: '/cotton/south-cotton-sarees' },
-  { name: 'Office Wear Sarees', path: '/cotton/office-wear-sarees' },
-  { name: 'Dr.Khadi', path: '/cotton/dr-khadi' },
-  { name: 'Block Printed Sarees', path: '/cotton/block-printed-sarees' },
-  { name: 'Bagru Print Sarees', path: '/cotton/bagru-print-sarees' },
-  { name: 'Ajrakh Print Sarees', path: '/cotton/ajrakh-print-sarees' },
-  { name: 'Ikkat Sarees', path: '/cotton/ikkat-sarees' },
-  { name: 'Chanderi Cotton Silks', path: '/cotton/chanderi-cotton-silks' },
-  { name: 'Kalamkari Sarees', path: '/cotton/kalamkari-sarees' },]
+  { name: 'Bengali Sarees', path: '/category/cotton/bengali-sarees' },
+  { name: 'Maheshwari Cotton', path: '/category/cotton/maheshwari-cotton' },
+  { name: 'Jaipur Cotton', path: '/category/cotton/jaipur-cotton' },
+  { name: 'South Cotton Sarees', path: '/category/cotton/south-cotton-sarees' },
+  { name: 'Office Wear Sarees', path: '/category/cotton/office-wear-sarees' },
+  { name: 'Dr.Khadi', path: '/category/cotton/dr-khadi' },
+  { name: 'Block Printed Sarees', path: '/category/cotton/block-printed-sarees' },
+  { name: 'Bagru Print Sarees', path: '/category/cotton/bagru-print-sarees' },
+  { name: 'Ajrakh Print Sarees', path: '/category/cotton/ajrakh-print-sarees' },
+  { name: 'Ikkat Sarees', path: '/category/cotton/ikkat-sarees' },
+  { name: 'Chanderi Cotton Silks', path: '/category/cotton/chanderi-cotton-silks' },
+  { name: 'Kalamkari Sarees', path: '/category/cotton/kalamkari-sarees' },]
 
     },
     {
-  name: 'Regional',
-  path: '/regional',
-  subcategories: [
-    { name: 'Sambalpuri Sarees', path: '/regional/sambalpuri-sarees' },
-    { name: 'Kanjivaram Sarees', path: '/regional/kanjivaram-sarees' },
-    { name: 'Bengali Sarees', path: '/regional/bengali-sarees' },
-    { name: 'Mysore Sarees', path: '/regional/mysore-sarees' },
-    { name: 'Maheshwari Sarees', path: '/regional/maheshwari-sarees' },
-    { name: 'Karnataka Sarees', path: '/regional/karnataka-sarees' },
-    { name: 'Tamilnadu Sarees', path: '/regional/tamilnadu-sarees' },
-    { name: 'Banarasi Sarees', path: '/regional/banarasi-sarees' },
-    { name: 'Banarasi Dupatta', path: '/regional/banarasi-dupatta' }
-  ]
-},
+      name: 'Regional',
+      path: '/category/regional',
+      subcategories: [
+        { name: 'Sambalpuri Sarees', path: '/category/regional/sambalpuri-sarees' },
+        { name: 'Kanjivaram Sarees', path: '/category/regional/kanjivaram-sarees' },
+        { name: 'Bengali Sarees', path: '/category/regional/bengali-sarees' },
+        { name: 'Mysore Sarees', path: '/category/regional/mysore-sarees' },
+        { name: 'Maheshwari Sarees', path: '/category/regional/maheshwari-sarees' },
+        { name: 'Karnataka Sarees', path: '/category/regional/karnataka-sarees' },
+        { name: 'Tamilnadu Sarees', path: '/category/regional/tamilnadu-sarees' },
+        { name: 'Banarasi Sarees', path: '/category/regional/banarasi-sarees' },
+        { name: 'Banarasi Dupatta', path: '/category/regional/banarasi-dupatta' }
+      ]
+    },
     { 
       name: 'Banarasi', 
-      path: '/banarasi',
+      path: '/category/banarasi',
       subcategories: [
-        { name: 'Banarasi Sarees', path: '/banarasi/banarasi-sarees' },
-        { name: 'Banarasi Dupatta', path: '/banarasi/banarasi-dupatta' },
-        { name: 'Banarasi Dress Material', path: '/banarasi/banarasi-dress-material' }
+        { name: 'Banarasi Sarees', path: '/category/banarasi/banarasi-sarees' },
+        { name: 'Banarasi Dupatta', path: '/category/banarasi/banarasi-dupatta' },
+        { name: 'Banarasi Dress Material', path: '/category/banarasi/banarasi-dress-material' }
       ]
     },
     { 
       name: 'Designer Sarees', 
-      path: '/designer-sarees',
+      path: '/category/designer-sarees',
       subcategories: [
-        { name: 'Party Wear Sarees', path: '/designer-sarees/party-wear' },
-        { name: 'Wedding Sarees', path: '/designer-sarees/wedding' },
-        { name: 'Festive Sarees', path: '/designer-sarees/festive' },
-        { name: 'Bollywood Style Sarees', path: '/designer-sarees/bollywood-style' },
-        { name: 'Heavy Embroidered Sarees', path: '/designer-sarees/heavy-embroidered' }
+        { name: 'Party Wear Sarees', path: '/category/designer-sarees/party-wear' },
+        { name: 'Wedding Sarees', path: '/category/designer-sarees/wedding' },
+        { name: 'Festive Sarees', path: '/category/designer-sarees/festive' },
+        { name: 'Bollywood Style Sarees', path: '/category/designer-sarees/bollywood-style' },
+        { name: 'Heavy Embroidered Sarees', path: '/category/designer-sarees/heavy-embroidered' }
       ]
     },
     { 
       name: 'Printed Sarees', 
-      path: '/printed-sarees',
+      path: '/category/printed-sarees',
       subcategories: [
-        { name: 'Floral Printed Sarees', path: '/printed-sarees/floral' },
-        { name: 'Digital Printed Sarees', path: '/printed-sarees/digital' },
-        { name: 'Block Printed Sarees', path: '/printed-sarees/block' },
-        { name: 'Abstract Printed Sarees', path: '/printed-sarees/abstract' },
-        { name: 'Geometric Printed Sarees', path: '/printed-sarees/geometric' }
+        { name: 'Floral Printed Sarees', path: '/category/printed-sarees/floral' },
+        { name: 'Digital Printed Sarees', path: '/category/printed-sarees/digital' },
+        { name: 'Block Printed Sarees', path: '/category/printed-sarees/block' },
+        { name: 'Abstract Printed Sarees', path: '/category/printed-sarees/abstract' },
+        { name: 'Geometric Printed Sarees', path: '/category/printed-sarees/geometric' }
       ]
     },
   ];
@@ -135,6 +135,14 @@ const Header = () => {
                 <div 
                   className="absolute left-1/2 transform -translate-x-1/2 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-100"
                 >
+                  <Link
+                    to={category.path}
+                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-rose-500 font-medium"
+                    onClick={() => setActiveCategory(null)}
+                  >
+                    All {category.name}
+                  </Link>
+                  <div className="border-t border-gray-100 my-1" />
                   {category.subcategories.map((subcategory) => (
                     <Link
                       key={subcategory.name}
@@ -156,7 +164,7 @@ const Header = () => {
           {/* Main Categories */}
           <div className="flex space-x-2 overflow-x-auto px-4 pt-3 pb-2 hide-scrollbar">
             {categories.map((category) => (
-              <div key={category.name} className="flex-shrink-0">
+              <div key={category.name} className="shrink-0">
                 <button
                   onClick={() => handleClick(category.name === activeCategory ? null : category.name)}
                   className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 whitespace-nowrap ${
@@ -193,7 +201,7 @@ const Header = () => {
                       key={subcategory.name}
                       to={subcategory.path}
                       onClick={() => setActiveCategory(null)}
-                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-rose-500 hover:bg-rose-50 rounded-md transition-colors duration-200"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:text-rose-500 hover:bg-rose-50 rounded-md transition-colors duration-200"
                     >
                       {subcategory.name}
                     </Link>
@@ -202,7 +210,7 @@ const Header = () => {
             </div>
           )}
           
-          <style jsx>{`
+          <style>{`
             .hide-scrollbar::-webkit-scrollbar {
               display: none;
               height: 0;
